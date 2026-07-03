@@ -42,6 +42,9 @@ fn main() {
     
     // Get OS information using the os_info crate.
     let info = os_info::get();
+
+    // Get kernel version using the sysinfo crate.
+    let kernel_version = sysinfo::System::kernel_version();
     
     // Extract architecture information, defaulting to an empty string if not found.
     let architecture = info.architecture().unwrap_or("");
@@ -60,12 +63,18 @@ fn main() {
 
     if !verbose {
         // Print full information in a single line summary.
-        let summary = format!("{info} {edition}{codename}{architecture}");
-        println!("{}", summary.trim());
+        let mut summary = format!("{info} {edition}{codename}{architecture}").trim().to_string();
+        if let Some(kv) = kernel_version {
+            summary.push_str(&format!(" (kernel {kv})"));
+        }
+        println!("{summary}");
     } else {
         // Print information separately on multiple lines.
         println!("Type: {}", info.os_type());
         println!("Version: {}", info.version());
+        if let Some(kv) = kernel_version {
+            println!("Kernel Version: {kv}");
+        }
         if !edition.is_empty() {
             println!("Edition: {}", edition.trim());
         }

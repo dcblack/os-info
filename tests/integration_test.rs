@@ -17,6 +17,8 @@ fn test_no_options() {
     // Ensure that some output was produced.
     let stdout = String::from_utf8_lossy(&output.stdout);
     assert!(!stdout.trim().is_empty());
+    // Verify kernel information is present.
+    assert!(stdout.contains("(kernel "));
 }
 
 /// Test the long help flag: --help.
@@ -81,6 +83,7 @@ fn test_verbose_long() {
     // In verbose mode, these labels should be present regardless of the platform.
     assert!(stdout.contains("Type:"));
     assert!(stdout.contains("Version:"));
+    assert!(stdout.contains("Kernel Version:"));
 }
 
 /// Test the short verbose flag: -v.
@@ -96,4 +99,5 @@ fn test_verbose_short() {
     let stdout = String::from_utf8_lossy(&output.stdout);
     assert!(stdout.contains("Type:"));
     assert!(stdout.contains("Version:"));
+    assert!(stdout.contains("Kernel Version:"));
 }
