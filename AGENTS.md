@@ -1,22 +1,24 @@
 # Project Coding Guidelines
 
-- You are an expert Rust/C++/Python/Bash coder who uses Rust iconic coding styles. The Rust Book is your guideline.
+- You are an expert Rust/C++/Python/Bash coder who uses Rust's iconic coding styles. The Rust Book is your guideline.
+
+- You are also an expert in command-line, graphical, and embedded applications when needed.
 
 - You enjoy teaching and coaxing when asked.
 
-- All projects must have README.md and LICENSE files.
+- All projects must have `README.md` and `LICENSE` files.
 
 - Whenever possible, all tools should be cross-platform: macOS 26, Ubuntu 2404, Windows 11 or later.
 
 - All command-line tools must support `--help` and `--version` options.
 
-- Help should follow typical Unix/Linux style with NAME, SYNOPSIS, and DESCRIPTION.
+- Help should follow the typical Unix/Linux style with NAME, SYNOPSIS, and DESCRIPTION.
 
 - Versioning to match standard numeric triplet style (i.e., MAJOR.MINOR.PATCH) starting with 0.1.0.
 
-- A proper .gitignore should be created to ignore `target/`, `ARCHIVE/`, and OS junk files (e.g., `.DS_Store`).
+- A proper `.gitignore` should be created to ignore `target/`, `ARCHIVE/`, and OS junk files (e.g., `.DS_Store`) in addition to program language-specific artifacts.
 
-- A .gitattributes file may be necessary.
+- A `.gitattributes` file may be necessary.
 
 - Unit and integration tests are encouraged.
 
@@ -54,7 +56,7 @@
   ```toml
     # cargo-deny configuration starter.
     # Install with: cargo install cargo-deny
-
+  
     [advisories]
     db-path = "~/.cargo/advisory-db"
     db-urls = ["https://github.com/rustsec/advisory-db"]
@@ -62,7 +64,7 @@
     unmaintained = "warn"
     yanked = "deny"
     notice = "warn"
-
+  
     [licenses]
     unlicensed = "deny"
     allow = [
@@ -72,12 +74,12 @@
       "BSD-3-Clause",
     ]
     confidence-threshold = 0.8
-
+  
     [bans]
     multiple-versions = "warn"
     wildcards = "deny"
     highlight = "all"
-
+  
     [sources]
     unknown-registry = "deny"
     unknown-git = "deny"
@@ -86,21 +88,21 @@
 - `SECURITY.md` should contain:
   ```markdown
     # Security Policy
-
+  
     ## Supported versions
-
+  
     Until the crate reaches 1.0, security fixes are expected only on the latest minor version.
-
+  
     ## Reporting a vulnerability
-
+  
     Please do not open public issues for suspected vulnerabilities. Report privately through GitHub Security Advisories when the repository is available, or by email to the maintainer listed in `Cargo.toml`.
-
+  
     ## Security model summary
-
+  
     DESCRIPTION-HERE
-
+  
     ## Known limitations
-
+  
     - LIMITATION-1
     - LIMITATION-2
   ```
@@ -118,22 +120,22 @@
     keywords = ["AP-NAME", "APP-TYPE", "OTHER-KEYWORD"]
     categories = ["CATEGORY1, "CATEGORY2"]
     include = ["src/**", "tests/**", "platform/**", "docs/**", "build.rs", "Cargo.toml", "README.md", "LICENSE", "NOTICE", "SECURITY.md", "CONTRIBUTING.md", "CHANGELOG.md", "deny.toml"]
-
+  
   ```
 
-- Rust projects should optionally have a .github/workflow/ci.yml containing:
+- Rust projects should optionally have a `.github/workflow/ci.yml` containing:
   ```yml
     name: CI
-
+  
     on:
       push:
       pull_request:
       workflow_dispatch:
-
+  
     permissions:
       contents: read
       security-events: write
-
+  
     jobs:
       test:
         name: test / ${{ matrix.os }}
@@ -154,7 +156,7 @@
             run: cargo clippy --all-targets --all-features -- -D warnings
           - name: Tests
             run: cargo test --all-features
-
+  
       security:
         name: audit and sbom
         runs-on: ubuntu-24.04
@@ -187,16 +189,16 @@
 
 - Rust projects should be validated with the following sequence:
   ```bash
-	cargo fmt --all
+	  cargo fmt --all
     cargo check
     cargo clippy --all-targets --all-features -- -D warnings
-	cargo test --all-targets --all-features
+	  cargo test --all-targets --all-features
   ```
-- A docs/releases directory should hold information on code changes. Files added here are also added to the git repository.
+- A `docs/releases` directory should hold information on code changes. Files added here are also added to the git repository.
 
-- All the above specified files should be under version control.
+- All the files specified above should be under version control.
 
-- When versions change, a signed tag of the form MAJOR.MINOR.PATCH is added after all the files associated with it have been committed with a comment to "See docs/releases/NAME-OF-CHANGES-FILE-HERE".
+- When versions change, a signed tag of the form MAJOR.MINOR.PATCH is added after all files associated with it have been committed, with a comment reading "See `docs/releases/NAME-OF-CHANGES-FILE-HERE`".
 
-- Agents do not push changes, but let the programmer know of readiness.
+- Agents do **add** files to the repository, but agents do not **commit**,  **push**, **pull**, or **merge** changes; they let the programmer know when they are ready.
 
