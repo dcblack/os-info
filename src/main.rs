@@ -1,22 +1,24 @@
 /// Prints the help message in a Unix-style format.
 fn print_help() {
-    println!("NAME");
-    println!("    os-info - print information about the current operating system");
-    println!();
-    println!("SYNOPSIS");
-    println!("    os-info [OPTIONS]");
-    println!();
-    println!("DESCRIPTION");
-    println!("    Prints information about the current operating system.");
-    println!();
-    println!("    -v, --verbose");
-    println!("        Print details on separate lines.");
-    println!();
-    println!("    -h, --help");
-    println!("        Display this help and exit.");
-    println!();
-    println!("    --version");
-    println!("        Output version information and exit.");
+    println!(
+        r#"NAME
+    os-info - print information about the current operating system
+
+SYNOPSIS
+    os-info [OPTIONS]
+
+DESCRIPTION
+    Prints information about the current operating system.
+
+    -v, --verbose
+        Print details on separate lines.
+
+    -h, --help
+        Display this help and exit.
+
+    --version
+        Output version information and exit."#
+    );
 }
 
 fn main() {
@@ -58,16 +60,17 @@ fn main() {
 
     if !verbose {
         // Print full information in a single line summary.
-        println!("{info} {edition}{codename}{architecture}");
+        let summary = format!("{info} {edition}{codename}{architecture}");
+        println!("{}", summary.trim());
     } else {
         // Print information separately on multiple lines.
         println!("Type: {}", info.os_type());
         println!("Version: {}", info.version());
         if !edition.is_empty() {
-            println!("Edition: {edition}");
+            println!("Edition: {}", edition.trim());
         }
         if !codename.is_empty() {
-            println!("Codename: {codename}");
+            println!("Codename: {}", codename.trim());
         }
         println!("Bitness: {}", info.bitness());
         if !architecture.is_empty() {
