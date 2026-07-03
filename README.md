@@ -10,3 +10,11 @@ Use `--help` or `-h` to obtain help.
 
 Use `--version` for the current version.
 
+## Testing
+
+Run the integration tests using Cargo:
+
+```bash
+cargo test
+```
+
