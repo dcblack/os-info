@@ -10,10 +10,10 @@ fn test_no_options() {
     // env!("CARGO_BIN_EXE_os-info") provides the path to the compiled binary.
     let mut cmd = Command::new(env!("CARGO_BIN_EXE_os-info"));
     let output = cmd.output().expect("failed to execute process");
-    
+
     // Verify that the command executed successfully.
     assert!(output.status.success());
-    
+
     // Ensure that some output was produced.
     let stdout = String::from_utf8_lossy(&output.stdout);
     assert!(!stdout.trim().is_empty());
@@ -28,9 +28,9 @@ fn test_help_long() {
     let mut cmd = Command::new(env!("CARGO_BIN_EXE_os-info"));
     cmd.arg("--help");
     let output = cmd.output().expect("failed to execute process");
-    
+
     assert!(output.status.success());
-    
+
     let stdout = String::from_utf8_lossy(&output.stdout);
     // Verify standard Unix-style help sections are present.
     assert!(stdout.contains("NAME"));
@@ -45,9 +45,9 @@ fn test_help_short() {
     let mut cmd = Command::new(env!("CARGO_BIN_EXE_os-info"));
     cmd.arg("-h");
     let output = cmd.output().expect("failed to execute process");
-    
+
     assert!(output.status.success());
-    
+
     let stdout = String::from_utf8_lossy(&output.stdout);
     assert!(stdout.contains("NAME"));
 }
@@ -59,9 +59,9 @@ fn test_version() {
     let mut cmd = Command::new(env!("CARGO_BIN_EXE_os-info"));
     cmd.arg("--version");
     let output = cmd.output().expect("failed to execute process");
-    
+
     assert!(output.status.success());
-    
+
     let stdout = String::from_utf8_lossy(&output.stdout);
     // Check for the expected version format.
     assert!(stdout.starts_with("os-info "));
@@ -76,9 +76,9 @@ fn test_verbose_long() {
     let mut cmd = Command::new(env!("CARGO_BIN_EXE_os-info"));
     cmd.arg("--verbose");
     let output = cmd.output().expect("failed to execute process");
-    
+
     assert!(output.status.success());
-    
+
     let stdout = String::from_utf8_lossy(&output.stdout);
     // In verbose mode, these labels should be present regardless of the platform.
     assert!(stdout.contains("Type:"));
@@ -93,9 +93,9 @@ fn test_verbose_short() {
     let mut cmd = Command::new(env!("CARGO_BIN_EXE_os-info"));
     cmd.arg("-v");
     let output = cmd.output().expect("failed to execute process");
-    
+
     assert!(output.status.success());
-    
+
     let stdout = String::from_utf8_lossy(&output.stdout);
     assert!(stdout.contains("Type:"));
     assert!(stdout.contains("Version:"));
