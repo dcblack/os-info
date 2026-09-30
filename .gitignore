@@ -3,3 +3,4 @@ target/
 .idea/
 .output.txt
 ARCHIVE/
+*.cdx.json

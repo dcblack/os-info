@@ -1,6 +1,6 @@
 [package]
 name = "os-info"
-version = "0.1.4"
+version = "0.1.9"
 edition = "2024"
 description = "A command-line tool to print information about the current operating system."
 license = "MIT"
@@ -10,7 +10,7 @@ documentation = "https://docs.rs/os-info"
 readme = "README.md"
 keywords = ["os-info", "cli", "system-info"]
 categories = ["command-line-utilities"]
-include = ["src/**", "tests/**", "platform/**", "docs/**", "build.rs", "Cargo.toml", "README.md", "LICENSE", "NOTICE", "SECURITY.md", "CONTRIBUTING.md", "CHANGELOG.md", "deny.toml"]
+include = ["src/**", "tests/**", "platform/**", "docs/**", "completions/**", "build.rs", "Cargo.toml", "README.md", "LICENSE", "NOTICE", "SECURITY.md", "CONTRIBUTING.md", "CHANGELOG.md", "deny.toml"]
 
 [dependencies]
 os_info = "3.15.0"

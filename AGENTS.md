@@ -8,9 +8,13 @@
 
 - All projects must have `README.md` and `LICENSE` files.
 
+- License shall be BSD unless stated otherwise or a `LICENSE` file already exists.
+
+- Copyright should be for the current year, but if already exists simply warn the developer of the mismatch.
+
 - Whenever possible, all tools should be cross-platform: macOS 26, Ubuntu 2404, Windows 11 or later.
 
-- All command-line tools must support `--help` and `--version` options.
+- All command-line tools must support `--help` and `--version` options. Include -h and -V shortcuts.
 
 - Help should follow the typical Unix/Linux style with NAME, SYNOPSIS, and DESCRIPTION.
 
@@ -189,11 +193,16 @@
 
 - Rust projects should be validated with the following sequence:
   ```bash
-	  cargo fmt --all
+	  cargo fmt --check
     cargo check
     cargo clippy --all-targets --all-features -- -D warnings
 	  cargo test --all-targets --all-features
   ```
+
+- Bash scripts should be tested to follow `shellcheck` advice including:
+  1. Variable expansions should usually be inside braces and often quotes (e.g., "${VARNAME}").
+  2. Tests for `if` and `while` should use Bash's double-bracket [[ ]] notation instead of single-brackets..
+
 - A `docs/releases` directory should hold information on code changes. Files added here are also added to the git repository.
 
 - All the files specified above should be under version control.
